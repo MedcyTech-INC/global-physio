@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { ServiceDetailPage } from '../components/conditions/ServiceDetailPage';
 import { CLINIC_SERVICES } from '../data/clinicData';
 
@@ -10,14 +10,15 @@ interface ServiceDetailPageWrapperProps {
 export const ServiceDetailPageWrapper: React.FC<ServiceDetailPageWrapperProps> = ({ onBookClick }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const serviceId = id || CLINIC_SERVICES[0].id;
 
   const handleBack = () => {
-    if (window.history.length > 2) {
-      navigate(-1);
+    if (location.state?.from === 'home' || location.state?.from === '/') {
+      navigate('/#services-preview');
     } else {
-      navigate('/conditions');
+      navigate('/services');
     }
   };
 
@@ -26,9 +27,10 @@ export const ServiceDetailPageWrapper: React.FC<ServiceDetailPageWrapperProps> =
       serviceId={serviceId}
       onBack={handleBack}
       onBookClick={onBookClick}
-      onSelectService={(newId) => navigate(`/services/${newId}`)}
+      onSelectService={(newId) => navigate(`/services/${newId}`, { state: location.state })}
     />
   );
 };
 
 export default ServiceDetailPageWrapper;
+

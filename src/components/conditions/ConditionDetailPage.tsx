@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
   Phone,
@@ -23,6 +24,7 @@ import {
 interface ConditionDetailPageProps {
   conditionId: string;
   onBack: () => void;
+  onAllServicesClick?: () => void;
   onBookClick: () => void;
   onSelectCondition?: (id: string) => void;
 }
@@ -30,9 +32,11 @@ interface ConditionDetailPageProps {
 export const ConditionDetailPage: React.FC<ConditionDetailPageProps> = ({
   conditionId,
   onBack,
+  onAllServicesClick,
   onBookClick,
   onSelectCondition
 }) => {
+  const navigate = useNavigate();
   const condition: SubConditionItem =
     getSubconditionById(conditionId) || ALL_ORTHOPEDIC_CONDITIONS[0];
 
@@ -83,24 +87,51 @@ export const ConditionDetailPage: React.FC<ConditionDetailPageProps> = ({
       {/* 01. TOP BREADCRUMB & NAVIGATION BAR */}
       {/* ------------------------------------------------------------- */}
       <header className="w-full bg-white/95 backdrop-blur-md border-b border-[#EAD9B7] sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <button
-            onClick={onBack}
-            className="group flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#65594B] hover:text-[#B87908] transition-colors py-1.5 px-2.5 rounded-xl hover:bg-[#FAF4E8] cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 text-[#B87908]" />
-            <span>Back to {condition.categoryName}</span>
-          </button>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={onBack}
+              className="group flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#65594B] hover:text-[#B87908] transition-colors py-1.5 px-2.5 rounded-xl hover:bg-[#FAF4E8] cursor-pointer"
+              title={`Back to ${condition.categoryName}`}
+            >
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1 text-[#B87908]" />
+              <span>Back to {condition.categoryName}</span>
+            </button>
+            <button
+              onClick={onAllServicesClick || (() => navigate('/services'))}
+              className="hidden sm:inline-flex items-center text-xs font-bold text-[#B87908] hover:text-[#966205] bg-[#FAF4E8] hover:bg-[#F8EAC9] border border-[#EAD9B7] px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
+              title="Return directly to main services directory"
+            >
+              All Services
+            </button>
+          </div>
 
-          <div className="hidden md:flex items-center gap-2 text-center text-xs">
-            <span className="text-[#65594B] font-semibold">Services</span>
+          <nav aria-label="Breadcrumb" className="hidden lg:flex items-center gap-1.5 text-center text-xs">
+            <button
+              onClick={() => navigate('/')}
+              className="text-[#65594B] hover:text-[#B87908] font-semibold transition-colors py-1 px-1.5 rounded-lg hover:bg-[#FAF4E8] cursor-pointer"
+            >
+              Home
+            </button>
             <span className="text-[#EAD9B7]">/</span>
-            <span className="text-[#65594B] font-semibold">{condition.categoryName}</span>
+            <button
+              onClick={onAllServicesClick || (() => navigate('/services'))}
+              className="text-[#65594B] hover:text-[#B87908] font-semibold transition-colors py-1 px-1.5 rounded-lg hover:bg-[#FAF4E8] cursor-pointer"
+            >
+              Services
+            </button>
             <span className="text-[#EAD9B7]">/</span>
-            <span className="font-bold text-[#B87908] uppercase tracking-wider">
+            <button
+              onClick={onBack}
+              className="text-[#65594B] hover:text-[#B87908] font-semibold transition-colors py-1 px-1.5 rounded-lg hover:bg-[#FAF4E8] cursor-pointer"
+            >
+              {condition.categoryName}
+            </button>
+            <span className="text-[#EAD9B7]">/</span>
+            <span className="font-bold text-[#B87908] uppercase tracking-wider py-1 px-1.5">
               {condition.name}
             </span>
-          </div>
+          </nav>
 
           <div className="flex items-center gap-3">
             <a

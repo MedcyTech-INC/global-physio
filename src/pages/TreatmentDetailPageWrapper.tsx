@@ -14,11 +14,7 @@ export const TreatmentDetailPageWrapper: React.FC<TreatmentDetailPageWrapperProp
   const machineId = id || CLINIC_MACHINES[0].id;
 
   const handleBack = () => {
-    if (window.history.length > 2) {
-      navigate(-1);
-    } else {
-      navigate('/treatments');
-    }
+    navigate('/clinic');
   };
 
   return (

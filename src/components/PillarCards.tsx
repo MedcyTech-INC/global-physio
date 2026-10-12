@@ -54,7 +54,7 @@ export const PillarCards: React.FC<PillarCardsProps> = ({ onSelectPillar }) => {
   ];
 
   return (
-    <section className="relative z-20 bg-gradient-to-b from-[#FFFDF8] via-[#FAF4E8] to-[#FFFDF8] py-16 lg:py-24 overflow-hidden font-sans border-t border-[#EAD9B7]">
+    <section className="relative z-20 bg-gradient-to-b from-[#FFFDF8] via-[#FAF4E8] to-[#FFFDF8] pt-12 pb-16 sm:pt-14 sm:pb-18 lg:pt-16 lg:pb-24 overflow-hidden font-sans border-t border-[#EAD9B7]/60">
       {/* Subtle Ambient Light Glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-1/4 w-[550px] h-[550px] rounded-full bg-[#F8EAC9]/40 blur-[150px]" />
@@ -64,7 +64,7 @@ export const PillarCards: React.FC<PillarCardsProps> = ({ onSelectPillar }) => {
       <div className="max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-10 relative z-20">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-6">
           <div className="max-w-2xl space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#EAD9B7] text-[#B87908] text-xs font-extrabold uppercase tracking-widest shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-[#B87908]" />

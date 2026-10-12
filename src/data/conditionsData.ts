@@ -689,13 +689,13 @@ export const ALL_SPORTS_INJURIES: SubConditionItem[] = [
     serviceId: 'sports-injuries',
     categoryName: 'Sports Injuries',
     bodyArea: 'Thigh & Posterior Chain',
-    image: '/images/conditions/muscle-strain.png',
-    tagline: 'Restore sprint power, high-speed deceleration, and pelvic control.',
-    shortDescription: 'A strain affecting the muscles at the back of the thigh, often associated with sprinting, jumping, or sudden movement.',
-    whatItMeans: 'The hamstrings are muscles at the back of your thigh. They can become strained during sprinting, jumping, or sudden movements.',
-    howWeTreat: 'Treatment includes gradually restoring flexibility and strength, improving hip and leg control, and introducing running and sport-specific exercises as recovery progresses.',
-    recoveryGoal: 'To rebuild hamstring strength and prepare you to safely return to running and sports.',
-    rehabilitationFocus: ['Healing', 'Flexibility', 'Strength', 'Running', 'Return to Sport']
+    image: '/images/conditions/hamstring-injury.png',
+    tagline: 'Restore sprint power, high-speed deceleration, and posterior chain resilience.',
+    shortDescription: 'A strain or tear affecting the posterior thigh muscles, commonly sustained during sprinting, kicking, or sudden explosive acceleration.',
+    whatItMeans: 'A hamstring strain or tear involves overstretching or structural fiber damage to the posterior thigh muscles (biceps femoris, semitendinosus, or semimembranosus). It commonly occurs during rapid sprinting, sudden deceleration, or high-force kicking, causing acute pain, tenderness, swelling, and weakness in knee flexion and hip extension.',
+    howWeTreat: 'We implement evidence-based progressive rehabilitation: acute phase protection, soft-tissue mobilization, lumbo-pelvic core stability, targeted eccentric muscle loading (e.g., Nordic hamstring protocols), and biomechanical sprint and change-of-direction retraining to prevent reinjury.',
+    recoveryGoal: 'To fully restore muscle length, eccentric tensile strength, sprinting mechanics, and confidently return to athletic performance without recurrence risk.',
+    rehabilitationFocus: ['Tissue Healing', 'Eccentric Strength', 'Pelvic Stability', 'Running Mechanics', 'Return to Sport']
   },
   {
     id: 'quadriceps-injury',
@@ -704,13 +704,13 @@ export const ALL_SPORTS_INJURIES: SubConditionItem[] = [
     serviceId: 'sports-injuries',
     categoryName: 'Sports Injuries',
     bodyArea: 'Thigh & Anterior Chain',
-    image: '/images/conditions/muscle-strain.png',
-    tagline: 'Rebuild kicking, jumping, and explosive front-thigh strength.',
-    shortDescription: 'A strain affecting the muscles at the front of the thigh, commonly associated with running, jumping, or sudden movements.',
-    whatItMeans: 'The quadriceps are the large muscles at the front of your thigh. They can become strained due to sudden movements, running, jumping, or sports activities.',
-    howWeTreat: 'We gradually restore flexibility, strength, balance, and control of the leg. Sport-specific exercises are added as the muscle becomes stronger.',
-    recoveryGoal: 'To restore full leg function and help you return to sports safely.',
-    rehabilitationFocus: ['Mobility', 'Strength', 'Control', 'Sport Training', 'Return']
+    image: '/images/conditions/quadriceps-injury.png',
+    tagline: 'Restore extensor mechanism integrity, kicking power, and decelerative knee braking.',
+    shortDescription: 'A strain, tear, or extensor tendon injury affecting the front thigh muscles (rectus femoris, vastus medialis/lateralis/intermedius) and quadriceps tendon.',
+    whatItMeans: 'The quadriceps muscle group and its overlying tendon form the primary extensor mechanism of the knee. Injuries range from rectus femoris muscle belly tears (frequently caused by forceful kicking or sprinting) to high-grade quadriceps tendon ruptures above the superior pole of the patella. Symptoms include sudden anterior thigh pain, swelling, inability to extend the knee against gravity, and a palpable defect or loss of weight-bearing stability.',
+    howWeTreat: 'Rehabilitation is tailored to the injury grade or post-surgical repair status. We start with protected swelling control, quad sets, and patellar mobilization, advancing to closed-kinetic-chain progressive loading (leg press, squats), eccentric quadriceps strengthening, plyometric shock absorption, and sport-specific kicking/sprinting drills.',
+    recoveryGoal: 'To restore complete knee extension range, regain symmetrical quadriceps peak torque, and ensure safe return to explosive athletic movements and sports participation.',
+    rehabilitationFocus: ['Extensor Mechanism Protection', 'Early Isometric Activation', 'Eccentric Strength Loading', 'Plyometric Deceleration', 'Return to Play']
   },
   {
     id: 'shoulder-sports-injuries',
@@ -734,13 +734,13 @@ export const ALL_SPORTS_INJURIES: SubConditionItem[] = [
     serviceId: 'sports-injuries',
     categoryName: 'Sports Injuries',
     bodyArea: 'Shoulder & Rotator Cuff',
-    image: '/images/conditions/shoulder-pain.png',
-    tagline: 'Stabilize the shoulder joint and regain overhead control.',
-    shortDescription: 'Injuries or overuse affecting the shoulder muscles that help control lifting and overhead movement.',
-    whatItMeans: 'The rotator cuff is a group of muscles that helps control the shoulder. Injury or overuse can cause pain and weakness, especially when lifting or reaching overhead.',
-    howWeTreat: 'Treatment may include gentle shoulder movement, stretching, strengthening of the rotator cuff and shoulder-blade muscles, and gradual return to overhead activities.',
-    recoveryGoal: 'To improve shoulder strength and control and safely return you to sports or exercise.',
-    rehabilitationFocus: ['Mobility', 'Strength', 'Control', 'Overhead Training', 'Return']
+    image: '/images/conditions/rotator-cuff-injuries.png',
+    tagline: 'Stabilize the glenohumeral joint, rebuild tendon tensile strength, and master overhead control.',
+    shortDescription: 'Partial or full-thickness tears and tendinopathy of the rotator cuff muscles (most commonly the supraspinatus), causing painful arc, night pain, and overhead weakness.',
+    whatItMeans: 'The rotator cuff is a crucial dynamic stabilizer comprising four muscles: supraspinatus, infraspinatus, teres minor, and subscapularis. Injuries range from acute tendon tears (often from sudden heavy lifting or falls) to chronic degenerative tears exacerbated by repetitive overhead sporting demands (cricket bowling, badminton, tennis, swimming). Common symptoms include lateral shoulder pain, painful arc during abduction, sleep disturbance when lying on the affected side, and loss of rotational strength.',
+    howWeTreat: 'We implement an individualized, evidence-based cuff rehabilitation pathway: acute symptom mitigation and manual capsular therapy, scapulothoracic rhythm correction, targeted rotator cuff isometric and eccentric loading, closed-kinetic-chain neuromuscular control, and sport-specific plyometrics with trunk-to-arm kinetic chain integration.',
+    recoveryGoal: 'To eliminate impingement and pain, restore full active range of motion, rebuild resilient rotator cuff tendon capacity, and safely return to overhead work and competitive sports.',
+    rehabilitationFocus: ['Pain Control & Scapular Setting', 'Isometric Cuff Activation', 'Progressive Tendon Loading', 'Kinetic Chain Mechanics', 'Return to Overhead Sport']
   },
   {
     id: 'tennis-elbow',

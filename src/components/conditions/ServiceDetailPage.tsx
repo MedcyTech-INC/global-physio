@@ -77,15 +77,25 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
             <span>Back to All Services</span>
           </button>
 
-          <div className="hidden md:flex items-center gap-2 text-center">
-            <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#B87908]">
-              {CLINIC_INFO.name}
+          <nav aria-label="Breadcrumb" className="hidden md:flex items-center gap-1.5 text-center text-xs">
+            <button
+              onClick={() => navigate('/')}
+              className="text-[#65594B] hover:text-[#B87908] font-semibold transition-colors py-1 px-1.5 rounded-lg hover:bg-[#FAF4E8] cursor-pointer"
+            >
+              Home
+            </button>
+            <span className="text-[#EAD9B7]">/</span>
+            <button
+              onClick={onBack}
+              className="text-[#65594B] hover:text-[#B87908] font-semibold transition-colors py-1 px-1.5 rounded-lg hover:bg-[#FAF4E8] cursor-pointer"
+            >
+              Services
+            </button>
+            <span className="text-[#EAD9B7]">/</span>
+            <span className="font-bold text-[#B87908] uppercase tracking-wider py-1 px-1.5">
+              {service.name}
             </span>
-            <span className="text-[#EAD9B7]">•</span>
-            <span className="text-xs text-[#65594B] font-bold">
-              Domain #{service.number}
-            </span>
-          </div>
+          </nav>
 
           <div className="flex items-center gap-3">
             <a

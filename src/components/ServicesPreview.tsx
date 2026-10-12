@@ -129,6 +129,7 @@ export const ServicesPreview: React.FC = () => {
               <Link
                 key={srv.id}
                 to={srv.link}
+                state={{ from: 'home' }}
                 className="group p-6 sm:p-7 rounded-3xl bg-[#FFFDF8] hover:bg-white border border-[#EAD9B7] hover:border-[#B87908] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>

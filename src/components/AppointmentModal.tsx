@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, Calendar, Clock, MapPin, Sparkles } from 'lucide-react';
+import {
+  X,
+  Calendar,
+  Clock,
+  Phone,
+  User,
+  CheckCircle2,
+  FileText,
+  Activity,
+  MapPin,
+  Sparkles
+} from 'lucide-react';
 import { CLINIC_INFO } from '../data/clinicData';
 
 interface AppointmentModalProps {
@@ -8,267 +19,288 @@ interface AppointmentModalProps {
 }
 
 export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onClose }) => {
-  const [step, setStep] = useState(1);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    reason: '',
-    bodyArea: '',
-    date: '',
-    timeSlot: '',
     name: '',
     phone: '',
-    email: '',
+    condition: 'General Physical Therapy Consultation',
+    date: new Date().toISOString().split('T')[0],
+    timeSlot: 'Morning (09:00 AM – 01:00 PM)',
     notes: '',
   });
+  const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
 
   if (!isOpen) return null;
 
-  const reasons = [
-    'Acute Pain / Spasm Relief',
-    'Sports Injury & Conditioning',
-    'Post-Surgery Orthopaedic Recovery',
-    'Spine & Neck Stiffness / Disc Care',
-    'Joint Mobility & Arthritis Relief',
+  const conditionOptions = [
     'General Physical Therapy Consultation',
+    'Back & Neck Pain / Spine Care',
+    'Knee Joint & Arthritis Pain',
+    'Sports Injury & Conditioning (Hamstring, ACL, Tendon)',
+    'Shoulder & Rotator Cuff Care',
+    'Post-Surgery Orthopaedic Rehabilitation',
+    'Neurological Recovery (Stroke, Parkinson’s, Bell’s Palsy)',
+    'Pediatric Movement & Milestone Support',
+    'Senior Mobility & Fall Prevention',
+    'Other Mobility Concern'
   ];
 
-  const bodyAreas = ['Neck', 'Shoulder', 'Spine / Back', 'Elbow', 'Hip & Pelvis', 'Knee Joint', 'Ankle & Foot', 'Full Body Posture'];
-  const timeSlots = ['09:00 AM', '11:00 AM', '02:00 PM', '04:00 PM', '06:00 PM', '08:00 PM'];
+  const timeSlots = [
+    'Morning (09:00 AM – 01:00 PM)',
+    'Afternoon (02:00 PM – 05:00 PM)',
+    'Evening (05:00 PM – 09:00 PM)'
+  ];
 
-  const handleNext = () => setStep((prev) => Math.min(prev + 1, 5));
-  const handlePrev = () => setStep((prev) => Math.max(prev - 1, 1));
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: { name?: string; phone?: string } = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Please enter your full name';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Please enter your contact phone number';
+    } else if (formData.phone.trim().length < 10) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+    setIsSubmitted(true);
+  };
+
+  const handleClose = () => {
+    setIsSubmitted(false);
+    onClose();
+  };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#24190F]/60 backdrop-blur-md transition-opacity">
-      <div className="relative w-full max-w-2xl bg-[#FFFDF8] border border-[#EAD9B7] rounded-3xl p-6 sm:p-9 shadow-2xl overflow-hidden animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#24190F]/60 backdrop-blur-md transition-opacity overflow-y-auto">
+      <div className="relative w-full max-w-xl bg-[#FFFDF8] border border-[#EAD9B7] rounded-3xl p-5 sm:p-8 shadow-2xl overflow-hidden my-auto animate-fadeIn max-h-[92vh] flex flex-col justify-between">
         
         {/* Subtle Decorative Ambient Glow */}
-        <div className="absolute top-0 right-0 w-72 h-72 bg-[#F8EAC9]/50 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#FAF4E8]/60 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#F8EAC9]/50 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FAF4E8]/60 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Header bar */}
-        <div className="relative z-10 flex items-center justify-between pb-5 border-b border-[#EAD9B7]">
+        {/* Modal Header */}
+        <div className="relative z-10 flex items-start justify-between pb-4 border-b border-[#EAD9B7]">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4E8] border border-[#EAD9B7] text-[#B87908] text-xs font-bold uppercase tracking-wider mb-1">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF4E8] border border-[#EAD9B7] text-[#B87908] text-[11px] font-extrabold uppercase tracking-wider mb-1">
               <Sparkles className="w-3 h-3 text-[#B87908]" />
-              <span>Step 0{step} of 05</span>
+              <span>DIRECT CLINIC APPOINTMENT</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-black text-[#24190F] tracking-tight">
-              Clinical Assessment Booking
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#24190F] tracking-tight">
+              {isSubmitted ? 'Appointment Confirmed' : 'Book an Appointment'}
             </h3>
-            <p className="text-xs text-[#65594B] mt-0.5">Dr. K. Bhavendra, PT — Global Physiotherapy Anantapur</p>
+            <p className="text-xs text-[#65594B] mt-0.5">
+              {CLINIC_INFO.doctor} • {CLINIC_INFO.name}, Anantapur
+            </p>
           </div>
           <button
-            onClick={onClose}
-            className="p-2.5 rounded-full bg-[#FAF4E8] text-[#65594B] hover:text-[#24190F] hover:bg-[#F8EAC9] transition-colors cursor-pointer"
+            onClick={handleClose}
+            className="p-2 rounded-full bg-[#FAF4E8] text-[#65594B] hover:text-[#24190F] hover:bg-[#F8EAC9] transition-colors cursor-pointer shrink-0"
             aria-label="Close booking modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Progress Bar */}
-        <div className="relative z-10 w-full bg-[#FAF4E8] h-2 rounded-full my-5 overflow-hidden border border-[#EAD9B7]/50">
-          <div
-            className="bg-gradient-to-r from-[#B87908] to-[#D99B24] h-full transition-all duration-300 rounded-full"
-            style={{ width: `${(step / 5) * 100}%` }}
-          />
-        </div>
+        {/* Modal Content */}
+        <div className="relative z-10 py-3 overflow-y-auto flex-1">
+          {!isSubmitted ? (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <p className="text-xs text-[#65594B] leading-relaxed">
+                Please fill out your details below. Our clinic desk will confirm your scheduled slot immediately.
+              </p>
 
-        {/* Step 1: What Brings You Here */}
-        {step === 1 && (
-          <div className="relative z-10 space-y-4 py-2">
-            <div>
-              <h4 className="text-base sm:text-lg font-bold text-[#24190F]">1. What is your primary clinical goal or symptom?</h4>
-              <p className="text-xs text-[#65594B] mt-0.5">Select the option that best describes your current requirement.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {reasons.map((r) => (
-                <button
-                  key={r}
-                  onClick={() => setFormData({ ...formData, reason: r })}
-                  className={`p-3.5 rounded-2xl text-left text-xs sm:text-sm font-semibold border transition-all cursor-pointer ${
-                    formData.reason === r
-                      ? 'bg-[#B87908] border-[#B87908] text-white shadow-md shadow-[#B87908]/20'
-                      : 'bg-white border-[#EAD9B7] text-[#24190F] hover:border-[#D99B24] hover:bg-[#FAF4E8]'
-                  }`}
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+              {/* Full Name & Phone Number Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#24190F] mb-1.5 flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5 text-[#B87908]" />
+                    <span>Full Name <span className="text-red-500">*</span></span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Enter your name"
+                    value={formData.name}
+                    onChange={(e) => {
+                      setFormData({ ...formData, name: e.target.value });
+                      if (errors.name) setErrors({ ...errors, name: undefined });
+                    }}
+                    className={`w-full p-3 rounded-xl bg-white border text-[#24190F] placeholder-[#65594B]/50 text-xs sm:text-sm focus:outline-none transition-all shadow-xs ${
+                      errors.name ? 'border-red-400 focus:border-red-500' : 'border-[#EAD9B7] focus:border-[#B87908]'
+                    }`}
+                  />
+                  {errors.name && <p className="text-[11px] text-red-500 mt-1 font-medium">{errors.name}</p>}
+                </div>
 
-        {/* Step 2: Body Area */}
-        {step === 2 && (
-          <div className="relative z-10 space-y-4 py-2">
-            <div>
-              <h4 className="text-base sm:text-lg font-bold text-[#24190F]">2. Which anatomical area requires attention?</h4>
-              <p className="text-xs text-[#65594B] mt-0.5">Target the location for clinical testing and biomechanical assessment.</p>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {bodyAreas.map((area) => (
-                <button
-                  key={area}
-                  onClick={() => setFormData({ ...formData, bodyArea: area })}
-                  className={`p-3.5 rounded-2xl text-center text-xs sm:text-sm font-semibold border transition-all cursor-pointer ${
-                    formData.bodyArea === area
-                      ? 'bg-[#B87908] border-[#B87908] text-white shadow-md shadow-[#B87908]/20'
-                      : 'bg-white border-[#EAD9B7] text-[#24190F] hover:border-[#D99B24] hover:bg-[#FAF4E8]'
-                  }`}
-                >
-                  {area}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#24190F] mb-1.5 flex items-center gap-1.5">
+                    <Phone className="w-3.5 h-3.5 text-[#B87908]" />
+                    <span>Phone Number <span className="text-red-500">*</span></span>
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="e.g. 98765 43210"
+                    value={formData.phone}
+                    onChange={(e) => {
+                      setFormData({ ...formData, phone: e.target.value });
+                      if (errors.phone) setErrors({ ...errors, phone: undefined });
+                    }}
+                    className={`w-full p-3 rounded-xl bg-white border text-[#24190F] placeholder-[#65594B]/50 text-xs sm:text-sm focus:outline-none transition-all shadow-xs ${
+                      errors.phone ? 'border-red-400 focus:border-red-500' : 'border-[#EAD9B7] focus:border-[#B87908]'
+                    }`}
+                  />
+                  {errors.phone && <p className="text-[11px] text-red-500 mt-1 font-medium">{errors.phone}</p>}
+                </div>
+              </div>
 
-        {/* Step 3: Date & Time */}
-        {step === 3 && (
-          <div className="relative z-10 space-y-4 py-2">
-            <div>
-              <h4 className="text-base sm:text-lg font-bold text-[#24190F]">3. Select your preferred date and time slot</h4>
-              <p className="text-xs text-[#65594B] mt-0.5">Clinic hours: Monday – Saturday (9:00 AM – 9:00 PM), Sunday by appointment.</p>
-            </div>
-            <div className="space-y-4">
+              {/* Clinical Condition / Concern Dropdown */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#24190F] mb-1.5 flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-[#B87908]" />
-                  <span>Preferred Consultation Date</span>
+                  <Activity className="w-3.5 h-3.5 text-[#B87908]" />
+                  <span>Clinical Concern or Condition</span>
                 </label>
-                <input
-                  type="date"
-                  value={formData.date}
-                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full p-3.5 rounded-2xl bg-white border border-[#EAD9B7] text-[#24190F] focus:outline-none focus:border-[#B87908] text-sm shadow-xs"
+                <select
+                  value={formData.condition}
+                  onChange={(e) => setFormData({ ...formData, condition: e.target.value })}
+                  className="w-full p-3 rounded-xl bg-white border border-[#EAD9B7] text-[#24190F] text-xs sm:text-sm focus:outline-none focus:border-[#B87908] transition-all shadow-xs cursor-pointer"
+                >
+                  {conditionOptions.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Preferred Date & Time Slot Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#24190F] mb-1.5 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-[#B87908]" />
+                    <span>Preferred Date</span>
+                  </label>
+                  <input
+                    type="date"
+                    min={new Date().toISOString().split('T')[0]}
+                    value={formData.date}
+                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                    className="w-full p-3 rounded-xl bg-white border border-[#EAD9B7] text-[#24190F] text-xs sm:text-sm focus:outline-none focus:border-[#B87908] transition-all shadow-xs"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#24190F] mb-1.5 flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-[#B87908]" />
+                    <span>Preferred Window</span>
+                  </label>
+                  <select
+                    value={formData.timeSlot}
+                    onChange={(e) => setFormData({ ...formData, timeSlot: e.target.value })}
+                    className="w-full p-3 rounded-xl bg-white border border-[#EAD9B7] text-[#24190F] text-xs sm:text-sm focus:outline-none focus:border-[#B87908] transition-all shadow-xs cursor-pointer"
+                  >
+                    {timeSlots.map((ts) => (
+                      <option key={ts} value={ts}>
+                        {ts}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Notes / Symptoms (Optional) */}
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#24190F] mb-1.5 flex items-center gap-1.5">
+                  <FileText className="w-3.5 h-3.5 text-[#B87908]" />
+                  <span>Brief Notes or Symptoms (Optional)</span>
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="e.g. Pain for 2 weeks when walking, doctor recommendation..."
+                  value={formData.notes}
+                  onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                  className="w-full p-3 rounded-xl bg-white border border-[#EAD9B7] text-[#24190F] placeholder-[#65594B]/50 text-xs sm:text-sm focus:outline-none focus:border-[#B87908] transition-all shadow-xs resize-none"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#24190F] mb-2 flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-[#B87908]" />
-                  <span>Available Time Slots</span>
-                </label>
-                <div className="grid grid-cols-3 gap-2">
-                  {timeSlots.map((slot) => (
-                    <button
-                      key={slot}
-                      onClick={() => setFormData({ ...formData, timeSlot: slot })}
-                      className={`p-3 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
-                        formData.timeSlot === slot
-                          ? 'bg-[#B87908] border-[#B87908] text-white shadow-xs'
-                          : 'bg-white border-[#EAD9B7] text-[#24190F] hover:border-[#D99B24]'
-                      }`}
-                    >
-                      {slot}
-                    </button>
-                  ))}
+              {/* Direct Call Quick Bar */}
+              <div className="p-3 rounded-2xl bg-[#FAF4E8] border border-[#EAD9B7] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+                <div className="flex items-center gap-2 text-[#65594B]">
+                  <Phone className="w-3.5 h-3.5 text-[#B87908] shrink-0" />
+                  <span>Prefer to book over call?</span>
                 </div>
+                <a
+                  href={`tel:${CLINIC_INFO.rawPhone}`}
+                  className="font-bold text-[#B87908] hover:underline"
+                >
+                  Call Clinic: {CLINIC_INFO.phone}
+                </a>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#B87908] to-[#D99B24] hover:opacity-95 text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-[#B87908]/20 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-white" />
+                  <span>Confirm Appointment Booking</span>
+                </button>
+              </div>
+            </form>
+          ) : (
+            /* Confirmation Success State */
+            <div className="text-center py-4 space-y-4">
+              <div className="w-14 h-14 rounded-full bg-[#FAF4E8] text-[#B87908] flex items-center justify-center mx-auto border border-[#EAD9B7] shadow-xs">
+                <CheckCircle2 className="w-7 h-7" />
+              </div>
+              <div>
+                <h4 className="text-xl font-black text-[#24190F]">Appointment Request Received!</h4>
+                <p className="text-[#65594B] text-xs sm:text-sm max-w-md mx-auto leading-relaxed mt-1">
+                  Thank you, <strong className="text-[#B87908]">{formData.name}</strong>. Our clinical desk at Anantapur has recorded your details and will call you at <strong className="text-[#24190F]">{formData.phone}</strong> to confirm your slot.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-[#FAF4E8] border border-[#EAD9B7] text-left text-xs space-y-2 max-w-md mx-auto text-[#65594B]">
+                <p><strong className="text-[#24190F]">Patient:</strong> {formData.name}</p>
+                <p><strong className="text-[#24190F]">Condition:</strong> {formData.condition}</p>
+                <p><strong className="text-[#24190F]">Requested Slot:</strong> {formData.date} • {formData.timeSlot}</p>
+                {formData.notes && <p><strong className="text-[#24190F]">Notes:</strong> {formData.notes}</p>}
+                <p className="flex items-start gap-1.5 pt-2 text-[#65594B] border-t border-[#EAD9B7]">
+                  <MapPin className="w-3.5 h-3.5 text-[#B87908] shrink-0 mt-0.5" />
+                  <span>{CLINIC_INFO.address}</span>
+                </p>
+              </div>
+
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                <a
+                  href={`tel:${CLINIC_INFO.rawPhone}`}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#FAF4E8] hover:bg-[#F8EAC9] border border-[#EAD9B7] text-[#24190F] font-bold text-xs transition-colors"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#B87908]" />
+                  <span>Call Desk: {CLINIC_INFO.phone}</span>
+                </a>
+                <button
+                  onClick={handleClose}
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#B87908] hover:bg-[#966205] text-white font-bold text-xs uppercase tracking-wider shadow-md transition-all cursor-pointer"
+                >
+                  Done
+                </button>
               </div>
             </div>
-          </div>
-        )}
-
-        {/* Step 4: Patient Details */}
-        {step === 4 && (
-          <div className="relative z-10 space-y-4 py-2">
-            <div>
-              <h4 className="text-base sm:text-lg font-bold text-[#24190F]">4. Enter your contact information</h4>
-              <p className="text-xs text-[#65594B] mt-0.5">We will send appointment confirmation and doctor preparation notes.</p>
-            </div>
-            <div className="space-y-3">
-              <input
-                type="text"
-                placeholder="Full Name *"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full p-3.5 rounded-2xl bg-white border border-[#EAD9B7] text-[#24190F] placeholder-[#65594B]/60 text-sm focus:outline-none focus:border-[#B87908] shadow-xs"
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number (+91) *"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full p-3.5 rounded-2xl bg-white border border-[#EAD9B7] text-[#24190F] placeholder-[#65594B]/60 text-sm focus:outline-none focus:border-[#B87908] shadow-xs"
-              />
-              <input
-                type="email"
-                placeholder="Email Address (Optional)"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full p-3.5 rounded-2xl bg-white border border-[#EAD9B7] text-[#24190F] placeholder-[#65594B]/60 text-sm focus:outline-none focus:border-[#B87908] shadow-xs"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Step 5: Confirmation */}
-        {step === 5 && (
-          <div className="relative z-10 text-center py-4 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-[#FAF4E8] text-[#B87908] flex items-center justify-center mx-auto border border-[#EAD9B7] shadow-xs">
-              <CheckCircle2 className="w-8 h-8" />
-            </div>
-            <h4 className="text-2xl font-black text-[#24190F]">Consultation Request Received!</h4>
-            <p className="text-[#65594B] text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
-              Thank you, <strong className="text-[#B87908]">{formData.name || 'Patient'}</strong>. Dr. K. Bhavendra's clinical desk at Anantapur has recorded your priority booking and will call you shortly to confirm your assessment.
-            </p>
-            <div className="p-4 rounded-2xl bg-[#FAF4E8] border border-[#EAD9B7] text-left text-xs space-y-2 max-w-md mx-auto text-[#65594B]">
-              <p><strong className="text-[#24190F]">Care Requirement:</strong> {formData.reason || 'Physical Therapy Consultation'}</p>
-              <p><strong className="text-[#24190F]">Target Area:</strong> {formData.bodyArea || 'General Assessment'}</p>
-              <p><strong className="text-[#24190F]">Preferred Window:</strong> {formData.date || 'Earliest available'} @ {formData.timeSlot || 'Scheduled with desk'}</p>
-              <p className="flex items-start gap-1.5 pt-1 text-[#65594B] border-t border-[#EAD9B7]">
-                <MapPin className="w-3.5 h-3.5 text-[#B87908] shrink-0 mt-0.5" />
-                <span>{CLINIC_INFO.address}</span>
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Footer Navigation Buttons */}
-        <div className="relative z-10 flex items-center justify-between pt-5 mt-5 border-t border-[#EAD9B7]">
-          {step > 1 && step < 5 ? (
-            <button
-              onClick={handlePrev}
-              className="px-4 py-2.5 rounded-xl bg-[#FAF4E8] hover:bg-[#F8EAC9] text-[#24190F] font-bold text-xs flex items-center gap-1.5 cursor-pointer transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Back</span>
-            </button>
-          ) : (
-            <div />
-          )}
-
-          {step < 4 && (
-            <button
-              onClick={handleNext}
-              className="px-6 py-2.5 rounded-xl bg-[#B87908] hover:bg-[#966205] text-white font-bold text-xs flex items-center gap-2 cursor-pointer shadow-md shadow-[#B87908]/20 transition-all hover:scale-[1.02]"
-            >
-              <span>Continue</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          )}
-
-          {step === 4 && (
-            <button
-              onClick={handleNext}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#B87908] to-[#D99B24] hover:from-[#966205] hover:to-[#B87908] text-white font-bold text-xs flex items-center gap-2 cursor-pointer shadow-lg shadow-[#B87908]/25 transition-all hover:scale-[1.02]"
-            >
-              <span>Confirm Appointment Request</span>
-              <CheckCircle2 className="w-4 h-4" />
-            </button>
-          )}
-
-          {step === 5 && (
-            <button
-              onClick={onClose}
-              className="px-8 py-3 rounded-xl bg-[#B87908] hover:bg-[#966205] text-white font-bold text-sm mx-auto cursor-pointer shadow-md transition-all hover:scale-[1.02]"
-            >
-              Done & Return to Clinic
-            </button>
           )}
         </div>
       </div>
     </div>
   );
 };
+
+export default AppointmentModal;

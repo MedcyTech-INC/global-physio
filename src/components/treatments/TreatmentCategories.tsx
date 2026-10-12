@@ -49,7 +49,7 @@ export const TreatmentCategories: React.FC<TreatmentCategoriesProps> = ({ onBook
           {CLINIC_SERVICES.map((service) => (
             <div
               key={service.id}
-              onClick={() => navigate(`/services/${service.id}`)}
+              onClick={() => navigate(`/services/${service.id}`, { state: { from: 'services' } })}
               className="bg-white rounded-3xl border border-[#EAD9B7] shadow-[0_10px_30px_rgba(91,61,18,0.04)] hover:shadow-xl hover:border-[#B87908]/50 transition-all duration-300 hover:-translate-y-1.5 flex flex-col overflow-hidden cursor-pointer group"
             >
               {/* Image Frame */}

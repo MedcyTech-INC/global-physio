@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick }) => {
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${
         isScrolled
           ? 'bg-[#FAF7F2]/95 backdrop-blur-md py-2 shadow-md shadow-amber-950/5 border-b border-amber-200/50'
-          : 'bg-[#FAF7F2] py-3'
+          : 'bg-[#FAF7F2] py-2 lg:py-2.5 border-b border-amber-200/30'
       }`}
     >
       {/* Container matching Hero max-w-[1400px] with tight gap between logo and navbar */}
@@ -74,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick }) => {
           <img
             src={clinicLogo}
             alt={CLINIC_INFO.name}
-            className="h-14 sm:h-16 lg:h-18 w-auto max-w-[320px] object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-12 sm:h-14 lg:h-15 w-auto max-w-[300px] object-contain transition-transform duration-300 group-hover:scale-105"
           />
         </Link>
 

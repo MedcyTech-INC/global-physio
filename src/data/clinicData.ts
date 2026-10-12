@@ -173,7 +173,7 @@ export const TREATMENTS: Treatment[] = [
     title: "Back & Neck Care",
     subtitle: "Spinal Health & Decompression",
     description: "Specialised manual therapy and spinal alignment protocols to alleviate acute disc pain, sciatica, and chronic neck stiffness.",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+    image: "/images/back-spine-care.jpg",
     tags: ["Spine Rehab", "Manual Therapy", "Sciatica"]
   },
   {

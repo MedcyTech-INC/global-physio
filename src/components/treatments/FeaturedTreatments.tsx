@@ -69,7 +69,7 @@ export const FeaturedTreatments: React.FC<FeaturedTreatmentsProps> = ({ onBookCl
         'Thoracic mobility & chest opener protocols',
         'Kinetic chain alignment for everyday ease',
       ],
-      image: '/images/conditions/back-pain.png',
+      image: '/images/posture-correction.png',
       imageLeft: true,
     },
     {

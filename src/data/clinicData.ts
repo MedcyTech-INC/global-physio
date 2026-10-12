@@ -205,7 +205,7 @@ export const TREATMENTS: Treatment[] = [
     title: "Posture Correction",
     subtitle: "Ergonomics & Kinetic Realignment",
     description: "Re-educating spinal muscular imbalance caused by sedentary work, desk strain, and postural fatigue.",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+    image: "/images/posture-correction.png",
     tags: ["Ergonomics", "Spine Balance", "Core Control"]
   },
   {

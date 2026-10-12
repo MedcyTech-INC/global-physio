@@ -189,7 +189,7 @@ export const TREATMENTS: Treatment[] = [
     title: "Knee Rehabilitation",
     subtitle: "ACL, Meniscus & Osteoarthritis",
     description: "Targeted quadriceps strengthening, joint offloading, and post-surgical protocols to restore stable leg function.",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    image: "/images/knee-rehabilitation.png",
     tags: ["ACL Surgery", "Joint Wear", "Strength"]
   },
   {

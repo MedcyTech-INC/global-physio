@@ -17,7 +17,7 @@ export const FeaturedTreatments: React.FC<FeaturedTreatmentsProps> = ({ onBookCl
         'Meniscus tear non-surgical & post-op care',
         'Osteoarthritis offloading & joint lubrication drills',
       ],
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80',
+      image: '/images/knee-rehabilitation.png',
       imageLeft: true,
     },
     {

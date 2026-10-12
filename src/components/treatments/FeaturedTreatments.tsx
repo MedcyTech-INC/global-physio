@@ -82,7 +82,7 @@ export const FeaturedTreatments: React.FC<FeaturedTreatmentsProps> = ({ onBookCl
         'Progressive resistance load management',
         'Daily activity stamina & muscle endurance',
       ],
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1000&q=80',
+      image: '/images/mobility-strength.jpg',
       imageLeft: false,
     },
   ];

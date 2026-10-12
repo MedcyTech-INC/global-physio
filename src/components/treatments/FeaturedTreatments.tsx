@@ -56,7 +56,7 @@ export const FeaturedTreatments: React.FC<FeaturedTreatmentsProps> = ({ onBookCl
         'Hamstring & groin strain progressive loading',
         'Agility, proprioception & re-injury prevention',
       ],
-      image: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1000&q=80',
+      image: '/images/sports-rehabilitation.jpg',
       imageLeft: false,
     },
     {

@@ -197,7 +197,7 @@ export const TREATMENTS: Treatment[] = [
     title: "Sports Injuries",
     subtitle: "Biomechanics & Athletic Performance",
     description: "High-performance recovery for athletes, focusing on swift return-to-sport, strain prevention, and muscular power.",
-    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80",
+    image: "/images/sports-rehabilitation.jpg",
     tags: ["Athletics", "Tendonitis", "Return-to-Play"]
   },
   {

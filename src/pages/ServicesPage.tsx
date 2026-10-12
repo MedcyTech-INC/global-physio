@@ -3,7 +3,6 @@ import { TreatmentsHero } from '../components/treatments/TreatmentsHero';
 import { TreatmentCategories } from '../components/treatments/TreatmentCategories';
 import { FeaturedTreatments } from '../components/treatments/FeaturedTreatments';
 import { TreatmentMethods } from '../components/treatments/TreatmentMethods';
-import { ClinicEquipment } from '../components/clinic/ClinicEquipment';
 import { FindingRightApproach } from '../components/treatments/FindingRightApproach';
 import { TreatmentsCTA } from '../components/treatments/TreatmentsCTA';
 
@@ -26,14 +25,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBookClick }) => {
       {/* 04. Treatment Methods & Protocols */}
       <TreatmentMethods />
 
-      {/* 05. 18 Machines & Modalities */}
-      <ClinicEquipment 
-        onBookClick={onBookClick}
-        title="Treatment Machines & Therapeutic Modalities"
-        subtitle="Explore the 18 specialized physical therapy machines, traction decompression, and electro-thermal modalities utilized across our clinical programs."
-      />
-
-      {/* 06. Finding The Right Approach */}
+      {/* 05. Finding The Right Approach */}
       <FindingRightApproach />
 
       {/* 07. Final CTA */}

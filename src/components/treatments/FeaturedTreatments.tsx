@@ -30,7 +30,7 @@ export const FeaturedTreatments: React.FC<FeaturedTreatmentsProps> = ({ onBookCl
         'Postural re-education and spinal ergonomics',
         'Deep transversus abdominis core activation',
       ],
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1000&q=80',
+      image: '/images/back-spine-care.png',
       imageLeft: false,
     },
     {

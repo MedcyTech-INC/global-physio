@@ -21,13 +21,13 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreClick }) => {
   return (
     <section 
       data-hero
-      className="relative w-full bg-[#FAF7F2] font-sans pt-2 pb-4 sm:pt-3 sm:pb-5 lg:pt-3 lg:pb-5"
+      className="relative w-full bg-[#FAF7F2] font-sans py-2.5 sm:py-3 lg:py-3.5 flex flex-col lg:min-h-[calc(100svh-5rem)] box-border"
     >
       {/* ── SHARED CONTAINER: CENTERS UNIFIED HERO CANVAS ── */}
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
         
         {/* ── UNIFIED MAIN HERO CONTAINER (HOUSES CONTENT, SPINE ARTWORK, & STATS CARD) ── */}
-        <div className="relative w-full rounded-3xl border border-[#EAD9B7] bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2] to-[#FAF4E8] shadow-sm overflow-hidden p-4 sm:p-5 lg:p-6 xl:p-7 flex flex-col justify-between">
+        <div className="relative w-full flex-1 rounded-3xl border border-[#EAD9B7] bg-gradient-to-r from-[#FAF7F2] via-[#FAF7F2] to-[#FAF4E8] shadow-sm overflow-hidden p-5 sm:p-7 lg:p-8 xl:p-9 flex flex-col justify-between">
           
           {/* Background Radiant Spine Image (Anchored within right side of Hero Canvas) */}
           <div className="absolute top-0 right-0 w-full lg:w-[54%] xl:w-[50%] h-full pointer-events-none overflow-hidden z-0">
@@ -64,12 +64,12 @@ export const Hero: React.FC<HeroProps> = ({ onBookClick, onExploreClick }) => {
 
           {/* Subtle Ambient Radial Glow */}
           <div 
-            className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full opacity-35 blur-3xl pointer-events-none z-0"
+            className="absolute top-0 left-0 w-[420px] h-[420px] rounded-full opacity-35 blur-3xl pointer-events-none z-0"
             style={{ background: 'radial-gradient(circle, #F5E6C4 0%, #EBD5A2 40%, transparent 70%)' }}
           />
 
-          {/* ── TOP SECTION: LEFT CONTENT AREA ── */}
-          <div className="relative z-10 max-w-[620px] text-left">
+          {/* ── TOP SECTION: LEFT CONTENT AREA (VERTICALLY CENTERED IN TOP REGION) ── */}
+          <div className="relative z-10 max-w-[640px] text-left my-auto pt-1 sm:pt-2">
             
             {/* Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D9A74A]/40 bg-[#FFFDF9]/90 shadow-2xs backdrop-blur-sm mb-2.5">

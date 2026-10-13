@@ -7,7 +7,6 @@ import { ClinicEquipment } from '../components/clinic/ClinicEquipment';
 import { RecoveryJourney } from '../components/RecoveryJourney';
 import { PatientProgress } from '../components/PatientProgress';
 import { ClinicSection } from '../components/ClinicSection';
-import { FinalCTA } from '../components/FinalCTA';
 
 interface HomePageProps {
   onBookClick: () => void;
@@ -54,11 +53,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onBookClick }) => {
       {/* 07. Verified Patient Outcomes & Testimonials */}
       <PatientProgress />
 
-      {/* 08. Clinic Facility, Timings & Location (Anantapur Center) */}
+      {/* 08. Contact Us & Clinic Location Gateway */}
       <ClinicSection onBookClick={onBookClick} />
-
-      {/* 09. Final High-Impact Booking CTA */}
-      <FinalCTA onBookClick={onBookClick} />
     </main>
   );
 };

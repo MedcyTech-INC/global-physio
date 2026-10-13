@@ -60,26 +60,26 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookClick }) => {
 
   return (
     <header
-      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${
+      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 font-sans py-2 ${
         isScrolled
-          ? 'bg-[#FAF7F2]/95 backdrop-blur-md py-2 shadow-md shadow-amber-950/5 border-b border-amber-200/50'
-          : 'bg-[#FAF7F2] py-2 lg:py-2.5 border-b border-amber-200/30'
+          ? 'bg-[#FAF7F2]/95 backdrop-blur-md shadow-md shadow-amber-950/5 border-b border-amber-200/50'
+          : 'bg-[#FAF7F2] border-b border-amber-200/30'
       }`}
     >
-      {/* Container matching Hero max-w-[1400px] with tight gap between logo and navbar */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between lg:justify-start gap-2 lg:gap-3">
+      {/* Container matching Hero max-w-[1440px] with balanced spacing */}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 flex items-center justify-between gap-3 lg:gap-4 xl:gap-6">
         
-        {/* ── 1. LEFT: ENLARGED CLINIC LOGO (NO GAP) ── */}
+        {/* ── 1. LEFT: CLEAR, PROMINENT CLINIC LOGO ── */}
         <Link to="/" className="flex items-center group shrink-0" title={CLINIC_INFO.name}>
           <img
             src={clinicLogo}
             alt={CLINIC_INFO.name}
-            className="h-12 sm:h-14 lg:h-15 w-auto max-w-[300px] object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-14 sm:h-16 lg:h-[68px] w-auto max-w-[280px] sm:max-w-[340px] xl:max-w-[380px] object-contain transition-transform duration-300 group-hover:scale-102"
           />
         </Link>
 
-        {/* ── 2. WHITE CAPSULE NAVBAR (EQUAL GAPS BETWEEN ALL TABS & BUTTON) ── */}
-        <nav className="hidden lg:flex items-center justify-between flex-1 bg-white/95 backdrop-blur-md border border-amber-200/70 rounded-full shadow-lg shadow-amber-950/5 px-6 py-1.5 gap-3 xl:gap-5">
+        {/* ── 2. WHITE CAPSULE NAVBAR (VERTICALLY CENTERED WITH BALANCED GAPS) ── */}
+        <nav className="hidden lg:flex items-center justify-between flex-1 bg-white/95 backdrop-blur-md border border-amber-200/70 rounded-full shadow-md shadow-amber-950/5 px-6 py-2 gap-3 xl:gap-5">
           
           {/* Home */}
           <button

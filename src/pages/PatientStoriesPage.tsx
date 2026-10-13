@@ -2,6 +2,7 @@ import React from 'react';
 import { PatientStoriesHero } from '../components/patient-stories/PatientStoriesHero';
 import { GoogleReviews } from '../components/patient-stories/GoogleReviews';
 import { AppreciationThemes } from '../components/patient-stories/AppreciationThemes';
+import { SectionNextNavigator } from '../components/SectionNextNavigator';
 import { PatientStoriesCTA } from '../components/patient-stories/PatientStoriesCTA';
 
 interface PatientStoriesPageProps {
@@ -20,7 +21,10 @@ export const PatientStoriesPage: React.FC<PatientStoriesPageProps> = ({ onBookCl
       {/* 03. What Patients Appreciate (Themes) */}
       <AppreciationThemes />
 
-      {/* 04. Final CTA */}
+      {/* 04. In-Section Flow: Continue Exploring Insights */}
+      <SectionNextNavigator section="insights" />
+
+      {/* 05. Final CTA */}
       <PatientStoriesCTA onBookClick={onBookClick} />
     </main>
   );

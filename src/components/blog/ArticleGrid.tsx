@@ -99,8 +99,8 @@ export const ArticleGrid: React.FC<ArticleGridProps> = ({ onSelectArticle }) => 
 
                 {/* Bottom Read More Row */}
                 <div className="px-6 sm:px-7 pb-6 pt-4 border-t border-[#EAD9B7]/50 flex items-center justify-between text-xs font-bold text-[#B87908] group-hover:text-[#24190F] transition-colors">
-                  <span className="uppercase tracking-wider">Read Full Guide</span>
-                  <div className="w-8 h-8 rounded-full bg-[#FAF4E8] group-hover:bg-[#B87908] group-hover:text-white flex items-center justify-center transition-all duration-300">
+                  <span className="uppercase tracking-wider font-extrabold group-hover:underline">Read Full Guide</span>
+                  <div className="w-8 h-8 rounded-full bg-[#FAF4E8] group-hover:bg-[#B87908] group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-2xs">
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>

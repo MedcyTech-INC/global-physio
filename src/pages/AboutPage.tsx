@@ -4,6 +4,7 @@ import { WhoWeAre } from '../components/about/WhoWeAre';
 import { WhatWeBelieve } from '../components/about/WhatWeBelieve';
 import { CarePrinciples } from '../components/about/CarePrinciples';
 import { OurCommitment } from '../components/about/OurCommitment';
+import { SectionNextNavigator } from '../components/SectionNextNavigator';
 import { AboutCTA } from '../components/about/AboutCTA';
 
 interface AboutPageProps {
@@ -28,7 +29,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBookClick }) => {
       {/* 05. Our Commitment */}
       <OurCommitment />
 
-      {/* 06. Final CTA */}
+      {/* 06. In-Section Flow: Continue Exploring About Clinic */}
+      <SectionNextNavigator section="about" />
+
+      {/* 07. Final CTA */}
       <AboutCTA onBookClick={onBookClick} />
     </main>
   );

@@ -3,7 +3,6 @@ import { Phone, MapPin, Clock, ArrowUp, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CLINIC_INFO } from '../data/clinicData';
 import clinicLogo from '../assets/clinic_logo.png';
-import { NextSectionFlow } from './NextSectionFlow';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -12,10 +11,6 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="bg-[#FAF4E8] text-[#65594B] relative overflow-hidden font-sans border-t border-[#EAD9B7]">
-      
-      {/* Sequential Section Flow banner */}
-      <NextSectionFlow />
-
       <div className="max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-10 pt-14 pb-8 space-y-12 relative z-10">
         
         {/* Equal 4-Column Balanced Grid */}

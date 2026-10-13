@@ -9,7 +9,8 @@ import {
   FileText,
   Activity,
   MapPin,
-  Sparkles
+  Sparkles,
+  MessageCircle
 } from 'lucide-react';
 import { CLINIC_INFO } from '../data/clinicData';
 
@@ -20,6 +21,7 @@ interface AppointmentModalProps {
 
 export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onClose }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [whatsappLink, setWhatsappLink] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -31,6 +33,9 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onCl
   const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
 
   if (!isOpen) return null;
+
+  // Official clinic recipient WhatsApp number for Dr. Bhavendra: +91 733 088 5190
+  const TARGET_WHATSAPP_NUMBER = '917330885190';
 
   const conditionOptions = [
     'General Physical Therapy Consultation',
@@ -51,6 +56,44 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onCl
     'Evening (05:00 PM – 09:00 PM)'
   ];
 
+  const generateWhatsAppUrl = () => {
+    const formattedBookingTime = new Date().toLocaleString('en-IN', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+
+    const formattedPreferredDate = formData.date
+      ? new Date(formData.date + 'T00:00:00').toLocaleDateString('en-IN', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric'
+        })
+      : formData.date;
+
+    const notesSection = formData.notes.trim()
+      ? `\n*Notes / Symptoms:* ${formData.notes.trim()}`
+      : '';
+
+    const text =
+`*Global Physiotherapy Clinic, Anantapur*
+----------------------------------------
+*Patient Name:* ${formData.name.trim()}
+*Contact Number:* ${formData.phone.trim()}
+*Concern/Condition:* ${formData.condition}
+*Preferred Date:* ${formattedPreferredDate}
+*Preferred Window:* ${formData.timeSlot}${notesSection}
+
+*Booking Time:* ${formattedBookingTime}
+----------------------------------------
+_Please confirm my consultation slot. Thank you!_`;
+
+    return `https://wa.me/${TARGET_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: { name?: string; phone?: string } = {};
@@ -60,7 +103,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onCl
     }
     if (!formData.phone.trim()) {
       newErrors.phone = 'Please enter your contact phone number';
-    } else if (formData.phone.trim().length < 10) {
+    } else if (formData.phone.trim().replace(/\D/g, '').length < 10) {
       newErrors.phone = 'Please enter a valid 10-digit phone number';
     }
 
@@ -70,11 +113,21 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onCl
     }
 
     setErrors({});
+    const url = generateWhatsAppUrl();
+    setWhatsappLink(url);
     setIsSubmitted(true);
+
+    // Automatically open WhatsApp with details directed to doctor's number
+    try {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } catch {
+      // Fallback handled by the on-screen WhatsApp button
+    }
   };
 
   const handleClose = () => {
     setIsSubmitted(false);
+    setWhatsappLink('');
     onClose();
   };
 
@@ -251,9 +304,12 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onCl
                   type="submit"
                   className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#B87908] to-[#D99B24] hover:opacity-95 text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-[#B87908]/20 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-white" />
-                  <span>Confirm Appointment Booking</span>
+                  <MessageCircle className="w-4 h-4 text-white" />
+                  <span>Confirm & Send via WhatsApp</span>
                 </button>
+                <p className="text-[11px] text-center text-[#65594B]/80 mt-2">
+                  Details will be forwarded directly to Dr. Bhavendra (+91 733 088 5190)
+                </p>
               </div>
             </form>
           ) : (
@@ -263,14 +319,15 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onCl
                 <CheckCircle2 className="w-7 h-7" />
               </div>
               <div>
-                <h4 className="text-xl font-black text-[#24190F]">Appointment Request Received!</h4>
+                <h4 className="text-xl font-black text-[#24190F]">Appointment Details Sent!</h4>
                 <p className="text-[#65594B] text-xs sm:text-sm max-w-md mx-auto leading-relaxed mt-1">
-                  Thank you, <strong className="text-[#B87908]">{formData.name}</strong>. Our clinical desk at Anantapur has recorded your details and will call you at <strong className="text-[#24190F]">{formData.phone}</strong> to confirm your slot.
+                  Thank you, <strong className="text-[#B87908]">{formData.name}</strong>. Your appointment request has been forwarded directly to <strong className="text-[#24190F]">Dr. Bhavendra PT (+91 733 088 5190)</strong>.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-[#FAF4E8] border border-[#EAD9B7] text-left text-xs space-y-2 max-w-md mx-auto text-[#65594B]">
                 <p><strong className="text-[#24190F]">Patient:</strong> {formData.name}</p>
+                <p><strong className="text-[#24190F]">Contact:</strong> {formData.phone}</p>
                 <p><strong className="text-[#24190F]">Condition:</strong> {formData.condition}</p>
                 <p><strong className="text-[#24190F]">Requested Slot:</strong> {formData.date} • {formData.timeSlot}</p>
                 {formData.notes && <p><strong className="text-[#24190F]">Notes:</strong> {formData.notes}</p>}
@@ -280,7 +337,19 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onCl
                 </p>
               </div>
 
+              {/* Action Buttons */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                {whatsappLink && (
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-[#25D366]/20 transition-all cursor-pointer"
+                  >
+                    <MessageCircle className="w-4 h-4 fill-white" />
+                    <span>Open in WhatsApp</span>
+                  </a>
+                )}
                 <a
                   href={`tel:${CLINIC_INFO.rawPhone}`}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#FAF4E8] hover:bg-[#F8EAC9] border border-[#EAD9B7] text-[#24190F] font-bold text-xs transition-colors"

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { 
   Search, 
   ArrowRight, 
-  Phone, 
   X,
   Activity, 
   Dumbbell, 
@@ -23,7 +22,7 @@ import {
   MoveHorizontal,
   Split
 } from 'lucide-react';
-import { CLINIC_INFO } from '../../data/clinicData';
+
 import { 
   CLINIC_EQUIPMENT, 
   EQUIPMENT_CATEGORIES, 
@@ -312,39 +311,7 @@ export const ClinicEquipment: React.FC<ClinicEquipmentProps> = ({
           </div>
         )}
 
-        {/* Bottom Verification Note & Doctor Supervision Tag */}
-        <div className="mt-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#FAF4E8] via-white to-[#F8EAC9]/40 border border-[#EAD9B7] text-[#24190F] flex flex-col md:flex-row items-center justify-between gap-6 shadow-lg shadow-[#B87908]/5">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#B87908] to-[#D99B24] text-white flex items-center justify-center shrink-0 font-bold shadow-md shadow-[#B87908]/20">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="text-base sm:text-lg font-serif font-bold leading-snug text-[#24190F]">
-                Prescribed & Calibrated by Dr. K. Bhavendra PT
-              </h4>
-              <p className="text-xs sm:text-sm text-[#65594B] mt-1 max-w-2xl leading-relaxed">
-                No machine is applied in isolation. Equipment parameters, resistance loads, and treatment durations are personalized after rigorous physical evaluation at {CLINIC_INFO.name}.
-              </p>
-            </div>
-          </div>
 
-          <div className="flex items-center gap-3 shrink-0 w-full md:w-auto">
-            <a
-              href={`tel:${CLINIC_INFO.phone.replace(/\s+/g, '')}`}
-              className="flex-1 md:flex-none px-4 py-3 rounded-2xl bg-white hover:bg-[#FAF4E8] border border-[#EAD9B7] text-[#24190F] font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-xs"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#B87908]" />
-              <span>{CLINIC_INFO.phone}</span>
-            </a>
-            <button
-              onClick={onBookClick}
-              className="flex-1 md:flex-none px-5 py-3 rounded-2xl bg-[#B87908] hover:bg-[#a06806] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md shadow-[#B87908]/20 cursor-pointer"
-            >
-              <span>Consult Doctor</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </div>
 
       </div>
 

@@ -2,6 +2,7 @@ import { ClinicHero } from '../components/clinic/ClinicHero';
 import { ClinicFacilities } from '../components/clinic/ClinicFacilities';
 import { ClinicEquipment } from '../components/clinic/ClinicEquipment';
 import { ClinicCareSpace } from '../components/clinic/ClinicCareSpace';
+import { SectionNextNavigator } from '../components/SectionNextNavigator';
 import { ClinicCTA } from '../components/clinic/ClinicCTA';
 
 interface ClinicPageProps {
@@ -23,7 +24,10 @@ export const ClinicPage: React.FC<ClinicPageProps> = ({ onBookClick }) => {
       {/* 05. A Space Focused on Your Care */}
       <ClinicCareSpace />
 
-      {/* 06. Final CTA */}
+      {/* 06. In-Section Flow: Continue Exploring About Clinic */}
+      <SectionNextNavigator section="about" />
+
+      {/* 07. Final CTA */}
       <ClinicCTA onBookClick={onBookClick} />
     </div>
   );

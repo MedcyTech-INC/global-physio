@@ -183,7 +183,7 @@ export const ConditionDetailPage: React.FC<ConditionDetailPageProps> = ({
                 )}
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#24190F] tracking-tight leading-[1.12] uppercase">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#24190F] tracking-tight leading-[1.18] uppercase">
                 {condition.name}
               </h1>
 

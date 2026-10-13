@@ -143,7 +143,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
                 {renderIcon(service.iconType, 'w-6 h-6 sm:w-7 sm:h-7 text-[#B87908]')}
               </div>
               <div className="space-y-1.5">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#24190F] tracking-tight leading-[1.12] uppercase">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#24190F] tracking-tight leading-[1.18] uppercase">
                   {service.name}
                 </h1>
                 <p className="text-sm sm:text-lg font-bold text-[#B87908] leading-snug">

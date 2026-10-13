@@ -3,6 +3,7 @@ import { DoctorHero } from '../components/doctor/DoctorHero';
 import { DoctorProfile } from '../components/doctor/DoctorProfile';
 import { ClinicalExpertise } from '../components/doctor/ClinicalExpertise';
 import { TreatmentPhilosophy } from '../components/doctor/TreatmentPhilosophy';
+import { SectionNextNavigator } from '../components/SectionNextNavigator';
 import { DoctorCTA } from '../components/doctor/DoctorCTA';
 
 interface DoctorPageProps {
@@ -24,7 +25,10 @@ export const DoctorPage: React.FC<DoctorPageProps> = ({ onBookClick }) => {
       {/* 04. Treatment Philosophy */}
       <TreatmentPhilosophy />
 
-      {/* 05. Appointment CTA */}
+      {/* 05. In-Section Flow: Continue Exploring About Clinic */}
+      <SectionNextNavigator section="about" />
+
+      {/* 06. Appointment CTA */}
       <DoctorCTA onBookClick={onBookClick} />
     </main>
   );

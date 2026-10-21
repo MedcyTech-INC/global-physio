@@ -52,8 +52,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({ isOpen, onCl
 
   const timeSlots = [
     'Morning (09:00 AM – 01:00 PM)',
-    'Afternoon (02:00 PM – 05:00 PM)',
-    'Evening (05:00 PM – 09:00 PM)'
+    'Evening (04:30 PM – 09:00 PM)'
   ];
 
   const generateWhatsAppUrl = () => {

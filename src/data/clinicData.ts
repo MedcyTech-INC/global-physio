@@ -8,7 +8,7 @@ export const CLINIC_INFO = {
   landmark: "Beside Punjab National Bank",
   phone: "+91 73308 85190",
   rawPhone: "73308 85190",
-  hours: "9 AM – 9 PM (Mon – Sun)",
+  hours: "09:00 AM – 01:00 PM, 04:30 PM – 09:00 PM (Mon – Sun)",
   positioning: "MOVEMENT • RECOVERY • STRENGTH • INDEPENDENCE",
   tagline: "Move Better. Live Stronger."
 };
